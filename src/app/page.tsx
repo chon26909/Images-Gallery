@@ -13,21 +13,14 @@ import React from "react";
 //   } catch (error) {}
 // };
 
-const fetchData = async () => {
-  const posts: any = await getGalleryList({ limit: 50, offset: 5 });
-
-  return posts;
-};
-
 const page = async () => {
-  const posts = await fetchData();
+  const posts = await getGalleryList({ limit: 5, offset: 1 });
 
   return (
     <main className="mt-5">
       <div className="text-2xl font-bold text-center">Gallery</div>
       <div>
         {posts &&
-          posts.photos &&
           posts.photos.map((item: any, index: number) => {
             return (
               <Link href={`/${item.id}`}>
