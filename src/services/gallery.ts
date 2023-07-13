@@ -1,13 +1,15 @@
 import axios from "axios";
 import { ENDPOINTS } from "./api";
 
-export const getGalleryList = async () => {
+interface IGalleryListRequest {
+    limit: number;
+    offset: number;
+}
 
-    const offset = 5;
-    const limit = 20;
+export const getGalleryList = async (arg: IGalleryListRequest) => {
 
     try {
-        const { data } = await axios.get(ENDPOINTS.GET_GALLERY, { params: { offset, limit} });
+        const { data } = await axios.get(ENDPOINTS.GET_GALLERY, { params: arg });
 
         console.log("data", data)
       
