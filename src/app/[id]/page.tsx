@@ -1,5 +1,4 @@
-"use client";
-import axios from "axios";
+import { getGalleryById } from "@/services/gallery";
 import { NextPage } from "next";
 import Image from "next/image";
 
@@ -9,18 +8,18 @@ interface Props {
   };
 }
 
-const getPost = async (params: Props["params"]) => {
-  try {
-    const res = await axios.get(
-      "https://api.slingacademy.com/v1/sample-data/photos/" + params.id
-    );
+// const getPost = async (params: Props["params"]) => {
+//   try {
+//     const res = await axios.get(
+//       "https://api.slingacademy.com/v1/sample-data/photos/" + params.id
+//     );
 
-    return res.data;
-  } catch (error) {}
-};
+//     return res.data;
+//   } catch (error) {}
+// };
 
 const page: NextPage<Props> = async ({ params }) => {
-  const post = await getPost(params);
+  const post = await getGalleryById(params.id);
 
   return (
     <div>
