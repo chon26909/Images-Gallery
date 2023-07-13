@@ -23,13 +23,17 @@ const page: NextPage<Props> = async ({ params }) => {
 
   return (
     <div>
-      <div>{post.photo.title}</div>
-      <Image
-        src={post.photo.url}
-        alt={post.photo.title}
-        width={300}
-        height={300}
-      />
+      {post && (
+        <div>
+          <div>{post.photo.title}</div>
+          <Image
+            src={post.photo.url}
+            alt={post.photo.title}
+            width={300}
+            height={300}
+          />
+        </div>
+      )}
     </div>
   );
 };
