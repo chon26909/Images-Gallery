@@ -30,10 +30,7 @@ interface IGalleryReponse {
 
 export const getGalleryList = async (arg: IGalleryListRequest) => {
   try {
-    const { data } = await axios.get<IGalleryListResponse>(ENDPOINTS.GET_GALLERY, { params: arg });
-
-    console.log("data", data);
-
+    const { data } = await axios.get<IGalleryListResponse>(ENDPOINTS.GET_GALLERY, { params: arg })
     return data;
   } catch (error) {
     console.log("error", error);
@@ -42,10 +39,7 @@ export const getGalleryList = async (arg: IGalleryListRequest) => {
 
 export const getGalleryById = async (id: string) => {
   try {
-    const { data } = await axios.get<IGalleryReponse>(ENDPOINTS.GET_GALLERY + "/" + id);
-
-    console.log("getGalleryById ", data);
-
+    const { data } = await axios.get<IGalleryReponse>(ENDPOINTS.GET_GALLERY + "/" + id)
     return data;
   } catch (error) {
     console.log(error);
