@@ -1,8 +1,8 @@
 import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-    const token = localStorage.getItem("token");
-    config.headers.Authorization = 'Bearer ' + token;
+
+    config.baseURL = process.env.NEXT_PUBLIC_API_URL 
     return config;
 };
 const onRequestError = (err: AxiosError): Promise<AxiosError> => {
@@ -17,3 +17,4 @@ const onResponseError = (err: AxiosError): Promise<AxiosError> => {
     return Promise.reject(err.response);
 };
 axios.interceptors.response.use(onResponse, onResponseError);
+
