@@ -14,7 +14,7 @@ import React from "react";
 // };
 
 const fetchData = async () => {
-  const posts: any = await getGalleryList();
+  const posts: any = await getGalleryList({ limit: 50, offset: 5 });
 
   return posts;
 };
