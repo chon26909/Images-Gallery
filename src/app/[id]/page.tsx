@@ -22,16 +22,21 @@ const page: NextPage<Props> = async ({ params }) => {
   const post = await getGalleryById(params.id);
 
   return (
-    <div>
+    <div className="mx-auto w-[1000px]">
       {post && (
-        <div>
-          <div>{post.photo.title}</div>
+        <div className="mt-3 border rounded-md overflow-hidden">
           <Image
+            className="object-cover w-full h-[80vh]"
             src={post.photo.url}
             alt={post.photo.title}
-            width={300}
-            height={300}
+            width={0}
+            height={0}
+            sizes="100"
           />
+          <div className="py-4 px-5">
+            <div className="text-lg font-semibold">{post.photo.title}</div>
+            <div className="mt-2">{post.photo.description}</div>
+          </div>
         </div>
       )}
     </div>
