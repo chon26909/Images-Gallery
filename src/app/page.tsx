@@ -1,43 +1,51 @@
-import axios from "axios";
+import { getGalleryList } from "../services/gallery";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const getPosts = async () => {
-  try {
-    const res = await axios.get(
-      "https://api.slingacademy.com/v1/sample-data/photos?offset=5&limit=20"
-    );
+// const getPosts = async () => {
+//   try {
+//     const res = await axios.get(
+//       "https://api.slingacademy.com/v1/sample-data/photos?offset=5&limit=20"
+//     );
 
-    return res.data;
-  } catch (error) {}
+//     return res.data;
+//   } catch (error) {}
+// };
+
+const fetchData = async () => {
+  const posts: any = await getGalleryList();
+
+  return posts;
 };
 
 const page = async () => {
-  const posts: any = await getPosts();
+  const posts = await fetchData();
 
   return (
     <main className="mt-5">
       <div className="text-2xl font-bold text-center">Gallery</div>
       <div>
-        {posts.photos.map((item: any, index: number) => {
-          return (
-            <Link href={`/${item.id}`}>
-              <div>
-                <Image
-                  src={item.url}
-                  alt={item.title}
-                  width={300}
-                  height={300}
-                />
+        {posts &&
+          posts.photos &&
+          posts.photos.map((item: any, index: number) => {
+            return (
+              <Link href={`/${item.id}`}>
                 <div>
-                  {index + 1} {item.title}
+                  <Image
+                    src={item.url}
+                    alt={item.title}
+                    width={300}
+                    height={300}
+                  />
+                  <div>
+                    {index + 1} {item.title}
+                  </div>
+                  <div>{item.description}</div>
                 </div>
-                <div>{item.description}</div>
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
       </div>
     </main>
   );
