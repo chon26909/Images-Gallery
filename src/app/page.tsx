@@ -1,7 +1,9 @@
+import { getServerSession } from "next-auth";
 import { getGalleryList } from "../services/gallery";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 // const getPosts = async () => {
 //   try {
@@ -14,9 +16,13 @@ import React from "react";
 // };
 
 const page = async () => {
+  // const session = await getServerSession(authOptions);
+  // console.log("session", session);
+
   const posts = await getGalleryList({ limit: 52, offset: 0 });
   return (
     <main className="mt-5 container mx-auto">
+      {/* <pre>session: {JSON.stringify(session)}</pre> */}
       <div className="my-5 text-3xl font-bold text-center">Photo Gallery</div>
       <div className="grid grid-cols-fluid">
         {posts?.photos.map((item, index) => {
