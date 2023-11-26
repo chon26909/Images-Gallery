@@ -31,7 +31,7 @@ const page = async () => {
               key={index}
               className="m-5 border rounded-md overflow-hidden transition duration-150 hover:scale-110"
             >
-              <Link href={`/${item.id}`}>
+              <Link href={`${item.id}`}>
                 <div>
                   <Image
                     className="w-full"
