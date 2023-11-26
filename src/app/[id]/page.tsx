@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import { getGalleryById } from "@/services/gallery";
+import { getGalleryById, getGalleryList } from "@/services/gallery";
 import { NextPage } from "next";
 import Image from "next/image";
 import Card from "./Card";
@@ -19,6 +19,20 @@ interface Props {
 //     return res.data;
 //   } catch (error) {}
 // };
+
+export async function generateStaticParams() {
+  const res = await getGalleryList({ limit: 52, offset: 0 });
+
+  let paths: { id: string }[] = [];
+
+  if (res) {
+    paths = res.photos.map((item) => ({
+      id: String(item.id),
+    }));
+  }
+
+  return paths;
+}
 
 const page: NextPage<Props> = async ({ params }) => {
   const post = await getGalleryById(params.id);
